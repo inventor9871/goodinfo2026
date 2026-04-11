@@ -20,7 +20,4 @@
     4. 加入「顯示全部 (Back)」功能，提供流暢的使用者返回迴圈。
 
 ## 使用方式
-因本專案依賴 JavaScript `fetch` API 來獲取同一目錄底下的 CSV 檔案，受限於瀏覽器原生的 CORS 安全規範，無法直接透過雙擊 HTML 檔案 (`file://`) 來執行。
-
-請確保您的網頁伺服器（例如：XAMPP 內的 Apache）正在執行中，接著打開瀏覽器前往：
-`http://localhost/19_2026_Vibe/goodinfo2026/`
+[連覽網頁](https://inventor9871.github.io/goodinfo2026/)
