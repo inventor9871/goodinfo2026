@@ -194,7 +194,7 @@ body {
 }
 
 .search-box button {
-    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    background: linear-gradient(135deg, #fb7185, #e11d48);
     border: none;
     border-radius: 50%;
     width: 48px;
@@ -209,7 +209,7 @@ body {
 
 .search-box button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 15px rgba(225, 29, 72, 0.6);
 }
 
 .search-box button:active {
@@ -347,22 +347,25 @@ body {
 
 .back-btn {
     margin-bottom: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    padding: 0.5rem 1rem;
+    background: var(--error-color);
+    border: none;
+    color: white;
+    padding: 0.5rem 1.2rem;
     border-radius: 99px;
     cursor: pointer;
     font-size: 0.95rem;
-    transition: all 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    font-weight: 500;
 }
 
 .back-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--text-primary);
+    background: #e11d48;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
 }
 
 .card-header {
