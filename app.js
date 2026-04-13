@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let etfDataMap = new Map();
     let etfList = [];
+    
+    let currentSortCol = null;
+    let currentSortDesc = true;
 
     init();
 
@@ -151,7 +154,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedMonth = monthSelect.value;
         const filteredList = selectedMonth ? etfList.filter(item => item.month === selectedMonth) : etfList;
 
-        filteredList.forEach(item => {
+        let dataToRender = [...filteredList];
+        if (currentSortCol === 'yield') {
+            dataToRender.sort((a, b) => currentSortDesc ? b.yieldNum - a.yieldNum : a.yieldNum - b.yieldNum);
+        } else if (currentSortCol === 'date') {
+            dataToRender.sort((a, b) => {
+                const dateA = a.date !== '--' ? new Date(a.date).getTime() : 0;
+                const dateB = b.date !== '--' ? new Date(b.date).getTime() : 0;
+                return currentSortDesc ? dateB - dateA : dateA - dateB;
+            });
+        }
+
+        dataToRender.forEach(item => {
             const tr = document.createElement('tr');
             
             const isHighYield = item.yieldNum >= 5;
@@ -246,5 +260,43 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.key === 'Enter') {
             handleSearch();
         }
+    });
+
+    const dateHeader = document.getElementById('dateHeader');
+    const yieldHeader = document.getElementById('yieldHeader');
+
+    function updateSortIcons() {
+        const dateIcon = dateHeader.querySelector('.sort-icon');
+        const yieldIcon = yieldHeader.querySelector('.sort-icon');
+        dateIcon.textContent = '';
+        yieldIcon.textContent = '';
+        
+        if (currentSortCol === 'date') {
+            dateIcon.textContent = currentSortDesc ? ' ▼' : ' ▲';
+        } else if (currentSortCol === 'yield') {
+            yieldIcon.textContent = currentSortDesc ? ' ▼' : ' ▲';
+        }
+    }
+
+    dateHeader.addEventListener('click', () => {
+        if (currentSortCol === 'date') {
+            currentSortDesc = !currentSortDesc;
+        } else {
+            currentSortCol = 'date';
+            currentSortDesc = true;
+        }
+        updateSortIcons();
+        renderTable();
+    });
+
+    yieldHeader.addEventListener('click', () => {
+        if (currentSortCol === 'yield') {
+            currentSortDesc = !currentSortDesc;
+        } else {
+            currentSortCol = 'yield';
+            currentSortDesc = true;
+        }
+        updateSortIcons();
+        renderTable();
     });
 });
